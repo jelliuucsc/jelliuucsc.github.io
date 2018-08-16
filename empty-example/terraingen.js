@@ -77,16 +77,17 @@ function draw() {
   // console.log(mouseX, mouseY);
   // console.log(mouseY);
    for(let hexTile of hexTiles){
-    var hit = collidePointPoly(mouseX,mouseY,hexTile.gethexPoints());
-    if(hit){
-      // console.log(hexTile);
-      var on = 1;
-      hexTile.highlightHex(on);
-    }
-    else{
-      var on = 0;
-      hexTile.highlightHex(on);
-    }
+    hexTile.highlightHex();
+    // var hit = collidePointPoly(mouseX,mouseY,hexTile.gethexPoints());
+    // if(hit){
+    //   // console.log(hexTile);
+    //   var on = 1;
+    //   hexTile.highlightHex(on);
+    // }
+    // else{
+    //   var on = 0;
+    //   hexTile.highlightHex(on);
+    // }
   }
   for(let tree of treeGroup){
     tree.show();
