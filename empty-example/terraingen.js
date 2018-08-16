@@ -1,5 +1,12 @@
 
 var noiseVal;
+var greenHex;
+var g;
+var b;
+var br;
+var lbr;
+var index1 = 0;
+var index2 = 0;
 var noiseScale=0.02;
 var hexTiles = [];
 var hexOffset = [];
@@ -14,11 +21,9 @@ function preload(){
   house = loadImage('assets/house.png')
 }
 function setup() {
-  createCanvas(642,450);
-  greenHex = createButton()
+  createCanvas(800,450);
   noiseRand = int(random(0,100))
   var index = 0;
-  var index1 = 0;
   var int_j = 1;
   var j_length = 32;
   for(var i = 0; i < 53; i++){
@@ -56,19 +61,19 @@ function setup() {
       }
     }
   }
-  index1 = 0;
   for(var i = 0; i < 53; i++){
     for(var j = 1; j < 32; j ++){
       var seed = random(0,1);
       if(hexOffset[i][j].color[0] == 222 && hexOffset[i][j].color[1] == 175 && hexOffset[i][j].color[2] == 122){
         // console.log("here");
         if(seed < .1 && hexOffset[i][j].checkHouse() == 1 ){
-           houseGroup[index1] = new House(hexOffset[i][j].x, hexOffset[i][j].y, hexOffset[i][j].centerx, hexOffset[i][j].centery);
-           index1 += 1;
+           houseGroup[index2] = new House(hexOffset[i][j].x, hexOffset[i][j].y, hexOffset[i][j].centerx, hexOffset[i][j].centery);
+           index2 += 1;
         }
       }
     }
   }
+
 } 
 
 
@@ -77,33 +82,88 @@ function draw() {
   // console.log(mouseX, mouseY);
   // console.log(mouseY);
    for(let hexTile of hexTiles){
-    hexTile.highlightHex();
-    // var hit = collidePointPoly(mouseX,mouseY,hexTile.gethexPoints());
-    // if(hit){
-    //   // console.log(hexTile);
-    //   var on = 1;
-    //   hexTile.highlightHex(on);
-    // }
-    // else{
-    //   var on = 0;
-    //   hexTile.highlightHex(on);
-    // }
+    var hit = collidePointPoly(mouseX,mouseY,hexTile.gethexPoints());
+    if(hit){
+      // console.log(hexTile);
+      var on = 1;
+      hexTile.highlightHex(on);
+    }
+    else{
+      var on = 0;
+      hexTile.highlightHex(on);
+    }
   }
   for(let tree of treeGroup){
-    tree.show();
+    tree.show();    
   }
   for(let house of houseGroup){
     // console.log('hi');
     house.show();
     // console.log('hi');
   }
-  // image(house, 0, 8, 15, 15);
-  // scale(.2);
-  // image(tree, treeGroup[1].centery - 4, treeGroup[1].centerx - 13 , 10,15);
-  // console.log(treeGroup[1].centerx);
-  // console.log(treeGroup[1].centery);
- }
+  for(hexTile of hexTiles){
+     hit = collidePointPoly(mouseX,mouseY,hexTile.gethexPoints());
+     if(hit && mouseIsPressed){
+        if(g == 1){
+          var onTile = 2;
+          hexTile.highlightHex(onTile);
+        }
+        else if(b == 1){
+          var onTile = 3;
+          hexTile.highlightHex(onTile);
+        }
+        else if(br == 1){
+          var onTile = 4;
+          hexTile.highlightHex(onTile);
+        }
+        else if(lbr == 1){
+          var onTile = 5;
+          hexTile.highlightHex(onTile);
+        }
+     }
+  }
+}
 
+ 
+function keyPressed(){
+  if(keyCode == LEFT_ARROW){
+    // console.log('hey');
+    g = 1;
+    b = 0;
+    br = 0;
+    lbr = 0;
+  }
+  else if(keyCode == RIGHT_ARROW){
+    g = 0;
+    b = 1;
+    br = 0;
+    lbr = 0;
+  }
+  else if(keyCode == UP_ARROW){
+    g = 0;
+    b = 0;
+    br = 1;
+    lbr = 0;
+  }
+  else if(keyCode == DOWN_ARROW){
+    g = 0;
+    b = 0;
+    br = 0;
+    lbr = 1;
+  }
+  else if(keyCode == 84){
+    g = 0;
+    b = 0;
+    br = 0;
+    lbr = 0;
+  }
+  else if(keyCode == 83){
+    g = 0;
+    b = 0;
+    br = 0;
+    lbr = 0;
+  }
+}
 class HexTile {
   constructor(x, y){
     this.x = y;
@@ -155,6 +215,31 @@ class HexTile {
     if(on == 1){
       this.color[3]= 100;
     }
+    else if(on == 2){
+      this.color[0] = 70;
+      this.color[1] = 230;
+      this.color[2] = 112;
+      this.color[3] = 100;
+    }
+    else if(on == 3){
+      this.color[0] = 105;
+      this.color[1] = 76;
+      this.color[2] = 42;
+      this.color[3] = 100;
+    }
+    else if(on == 4){
+      this.color[0] = 94;
+      this.color[1] = 189;
+      this.color[2] = 236;
+      this.color[3] = 100;
+    }
+    else if(on == 5){
+      this.color[0] = 222;
+      this.color[1] = 175;
+      this.color[2] = 122;
+      this.color[3] = 100;
+    }
+
     else{
       this.color[3]= 255;
     }
