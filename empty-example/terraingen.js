@@ -15,6 +15,7 @@ function preload(){
 }
 function setup() {
   createCanvas(642,450);
+  greenHex = createButton()
   noiseRand = int(random(0,100))
   var index = 0;
   var index1 = 0;
@@ -76,7 +77,7 @@ function draw() {
   // console.log(mouseX, mouseY);
   // console.log(mouseY);
    for(let hexTile of hexTiles){
-    hit = collidePointPoly(mouseX,mouseY,hexTile.gethexPoints());
+    var hit = collidePointPoly(mouseX,mouseY,hexTile.gethexPoints());
     if(hit){
       // console.log(hexTile);
       var on = 1;
