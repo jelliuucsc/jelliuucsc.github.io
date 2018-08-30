@@ -267,7 +267,7 @@ class HexTile {
       noiseTotal += noiseVal;
     }
     noiseAverage = noiseTotal/6 * 10;
-    if(noiseAverage >= 0.1 && noiseAverage <= 0.4){
+    if(noiseAverage >= 0.1 && noiseAverage <= 0.3){
       return 1;
     }
     else{
@@ -276,7 +276,7 @@ class HexTile {
     
   }
   checkGround(){
-  noiseDetail(1,.2);
+  noiseDetail(2,.1);
   noiseSeed(noiseRand);
   var noiseTotal = 0;
   var noiseAverage = 0;
@@ -288,7 +288,7 @@ class HexTile {
       noiseTotal += noiseVal;
     }
     noiseAverage = noiseTotal/6 * 10;
-    if(noiseAverage >= 0.1 && noiseAverage <= 0.5){
+    if(noiseAverage >= 0.25 && noiseAverage <= 0.5){
       return 1;
     }
     else{
